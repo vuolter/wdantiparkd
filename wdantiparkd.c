@@ -2,37 +2,6 @@
 	wdantiparkd - A anti-intellipark daemon
 	(C) 2010 Sound <sound ~at~ sagaforce -dot- com>
 
-	wdantiparkd
-	===========
-
-	wdantiparmd combines the idea of laptop-mode and hard drive touching
-	to help keep the power usage low while maintaining a more reasonable 
-	load cycle count.
-
-	wdantiparmd is great for NAS servers which are infrequently accessed.
-	
-	Here's how it work. wdantiparmd runs as a daemon which monitors disk
-	activity. It runs in 3 states: ANTI-PARK, PARKED and SLEEP.
-
-	In ANTI-PARK state, the daemon makes disk access every 7 seconds to
-	prevent parking. The disk is continuously touched until there is no
-	read activities for 1 min. Disk data is synced periodically in this
-	state. Once 1 min of read-idleness has passed, it enters PARKED state.
-
-	In PARKED state, the daemon ceases it's disk access and allows the HD
-	head to returned to parked position (thus increasing cycle count by 1).
-	With laptop-mode enabled, all writes are buffered into RAM. This state
-	lasts for 5 mins. If disk activity occurs during these 5 minutes, then
-	it resumes back into ANTI-PARK state, except this time does it for 2 mins
-	and doubles everytime PARKED state is interrupted (up to a maximum). If
-	no disk activities occurs throughout PARKED state, then enter IDLE state.
-
-	In IDLE state, the operation is the same as PARKED state, except that any 
-	interruptions returns to the ANTI-PARK state with the default 1 minutes timeout.
-	Also, in IDLE state, disk spindown may occur if your kernel supports it.
-*/
-
-/*
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
